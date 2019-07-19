@@ -24,7 +24,7 @@ class CourseFilters extends FiltersAbstract
      */
     public static function mappings()
     {
-        return [
+        $map = [
 
             /**
              * Access filter
@@ -68,7 +68,13 @@ class CourseFilters extends FiltersAbstract
                 'title' => 'Subject',
                 'options' => Subject::get()->pluck('name', 'slug')->toArray()
             ],
+        ];
 
+        /**
+         * Filters to map only when the user is authenticated.
+         */
+        $mapWhenAuthenticated = [
+            
             /**
              * Started filter
              */
@@ -80,5 +86,11 @@ class CourseFilters extends FiltersAbstract
                 ]
             ],
         ];
+
+        if (auth()->check()) {
+            $map = array_merge($map, $mapWhenAuthenticated);
+        }
+
+        return $map;
     }
 }
