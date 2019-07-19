@@ -1,5 +1,18 @@
 <div>
 
+  @if (request()->query())
+    <a
+      href="{{ route('courses.index') }}"
+      class="block hover:no-underline hover:text-red-500 mb-4">
+      <span class="inline-block rounded bg-red-500 font-black text-white leading-none px-2 py-1">
+        &times;
+      </span>
+      <span class="text-xs ml-1">
+        Clear <strong>all</strong> filters
+      </span>
+    </a>
+  @endif
+
   {{-- Access --}}
   @component('courses.partials._filter-title')
     Access

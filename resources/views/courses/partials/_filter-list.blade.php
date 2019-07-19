@@ -8,4 +8,18 @@
       </a>
     </li>
   @endforeach
+  @if (request($key))    
+    <li>
+      <a
+        href="{{ route('courses.index', array_except(request()->query(), $key)) }}"
+        class="block hover:no-underline hover:text-red-500 pl-3 py-2">
+        <span class="inline-block rounded bg-red-500 font-black text-white leading-none px-2 py-1">
+          &times;
+        </span>
+        <span class="text-xs ml-1">
+          Clear filter
+        </span>
+      </a>
+    </li>
+  @endif
 </ul>
