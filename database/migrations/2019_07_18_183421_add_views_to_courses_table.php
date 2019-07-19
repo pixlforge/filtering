@@ -14,7 +14,7 @@ class AddViewsToCoursesTable extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->unsignedInteger('views')->after('type');
+            $table->unsignedInteger('views')->default(0)->after('type');
         });
     }
 
