@@ -11,6 +11,8 @@
         <div class="card-body">
           @if ($courses->count())  
             @each('courses.partials._course', $courses, 'course')
+
+            {{ $courses->appends(request()->query())->links() }}
           @else
             <div class="text-center py-16">
               <h3 class="text-lg font-bold">
