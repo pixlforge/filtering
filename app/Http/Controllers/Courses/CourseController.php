@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Models\Course;
-use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +11,7 @@ class CourseController extends Controller
     /**
      * Undocumented function
      *
-     * @return void
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index(Request $request)
     {

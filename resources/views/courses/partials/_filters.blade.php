@@ -13,7 +13,7 @@
     </a>
   @endif
 
-  @foreach (App\Filters\Course\CourseFilters::mappings() as $key => $map)
+  @foreach ($mappings as $key => $map)
     @component('courses.partials._filter-title')
       {{ $map['title'] }}
     @endcomponent
@@ -23,16 +23,4 @@
     ])
   @endforeach
 
-
-  {{-- Started --}}
-  {{-- @auth
-    @component('courses.partials._filter-title')
-      Progress
-    @endcomponent
-    @include('courses.partials._filter-list', [
-      'map' => ['true' => 'Started', 'false' => 'Not started'],
-      'key' => 'started'
-    ])
-  @endauth --}}
-  
 </div>
