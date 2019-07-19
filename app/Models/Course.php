@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Filters\Course\CourseFilters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class Course extends Model
 {
@@ -35,11 +36,45 @@ class Course extends Model
         'users',
     ];
 
-    public function scopeFilter(Builder $builder, $request, array $filters = [])
+    /**
+     * Get the formattedAccess attribute.
+     *
+     * @return string
+     */
+    public function getFormattedAccessAttribute()
+    {
+        return $this->free ? 'free' : 'premium';
+    }
+
+    /**
+     * Get the formattedStarted attribute.
+     *
+     * @return string
+     */
+    public function getFormattedStartedAttribute()
+    {
+        return $this->started ? 'Started' : 'Not started';
+    }
+
+    /**
+     * Scope courses by filters from the query.
+     *
+     * @param Builder $builder
+     * @param Request $request
+     * @param array $filters
+     * @return void
+     */
+    public function scopeFilter(Builder $builder, Request $request, array $filters = [])
     {
         return (new CourseFilters($request))->add($filters)->filter($builder);
     }
 
+    /**
+     * Checks whether or not the authenticated
+     * user has started this course.
+     *
+     * @return void
+     */
     public function getStartedAttribute()
     {
         if (!auth()->check()) {
