@@ -18,8 +18,6 @@ class CourseController extends Controller
     {
         $courses = Course::with(['subjects', 'users'])->filter($request)->get();
 
-        $subjects = Subject::get()->pluck('name', 'slug')->toArray();
-
-        return view('courses.index', compact('courses', 'subjects'));
+        return view('courses.index', compact('courses'));
     }
 }
