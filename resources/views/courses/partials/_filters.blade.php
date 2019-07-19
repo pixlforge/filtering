@@ -1,6 +1,6 @@
 <div>
 
-  @if (request()->query())
+  @if (array_intersect(array_keys(request()->query()), array_keys($mappings)))
     <a
       href="{{ route('courses.index') }}"
       class="block hover:no-underline hover:text-red-500 mb-4">
@@ -14,10 +14,10 @@
   @endif
 
   @foreach ($mappings as $key => $map)
-    @component('courses.partials._filter-title')
+    @component ('courses.partials._filter-title')
       {{ $map['title'] }}
     @endcomponent
-    @include('courses.partials._filter-list', [
+    @include ('courses.partials._filter-list', [
       'map' => $map['options'],
       'key' => $key
     ])
